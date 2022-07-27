@@ -17,6 +17,7 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       cardCollection: [],
+      filterCard: '',
     };
   }
 
@@ -106,6 +107,11 @@ class App extends React.Component {
     cardTrunfo: !card.cardTrunfo });
   }
 
+  cardsCollectionFiltered = () => {
+    const { cardCollection, filterCard } = this.state;
+    return cardCollection.filter(({ cardName }) => cardName.includes(filterCard));
+  }
+
   render() {
     const {
       cardName,
@@ -118,7 +124,7 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
-      cardCollection,
+      filterCard,
     } = this.state;
     return (
       <div>
@@ -148,7 +154,18 @@ class App extends React.Component {
           isPreview
         />
         <div>
-          {cardCollection.map((card) => (
+          <label htmlFor="filtro">
+            Filtro de Busca
+            <input
+              type="text"
+              name="filterCard"
+              id="filtro"
+              data-testid="name-filter"
+              value={ filterCard }
+              onChange={ this.onInputChange }
+            />
+          </label>
+          {this.cardsCollectionFiltered().map((card) => (
             <Card
               key={ card.cardName }
               cardName={ card.cardName }
