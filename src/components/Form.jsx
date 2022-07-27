@@ -32,25 +32,6 @@ export default class Form extends Component {
     const inputCheckboxDisabled = (
       <span>Você já tem um Super Trunfo em seu baralho</span>
     );
-
-    const buttonActive = (
-      <button
-        type="submit"
-        data-testid="save-button"
-        onClick={ onSaveButtonClick }
-      >
-        Salvar
-      </button>);
-
-    const buttonDisabled = (
-      <button
-        type="submit"
-        data-testid="save-button"
-        onClick={ onSaveButtonClick }
-        disabled
-      >
-        Salvar
-      </button>);
     return (
       <form>
         <label htmlFor="#">
@@ -135,7 +116,14 @@ export default class Form extends Component {
           </select>
         </label>
         {hasTrunfo ? inputCheckboxDisabled : inputCheckboxTrunfo }
-        {isSaveButtonDisabled ? buttonDisabled : buttonActive}
+        <button
+          type="submit"
+          data-testid="save-button"
+          onClick={ onSaveButtonClick }
+          disabled={ isSaveButtonDisabled }
+        >
+          Salvar
+        </button>
       </form>
     );
   }

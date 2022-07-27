@@ -28,9 +28,8 @@ class App extends React.Component {
       const attr2 = this.parseAttr(prevState.cardAttr2);
       const attr3 = this.parseAttr(prevState.cardAttr3);
 
-      const checkFieldNameAndDescription = prevState.cardName
-        && prevState.cardDescription;
-      const checkFieldImgAndRarity = prevState.cardImage;
+      const checkFieldInputs = prevState.cardName
+        && prevState.cardDescription && prevState.cardImage;
 
       const pointsAttributes = attr1 + attr2 + attr3;
       const summedPointsLimits = 210;
@@ -42,14 +41,10 @@ class App extends React.Component {
 
       const checkNegativeAttributes = attr1 >= 0 && attr2 >= 0 && attr3 >= 0;
 
-      const validation = checkFieldNameAndDescription
-        && checkFieldImgAndRarity
-        && checkLessThan && checkPoints && checkNegativeAttributes;
+      const validation = checkFieldInputs
+      && checkLessThan && checkPoints && checkNegativeAttributes;
 
-      if (validation) {
-        return { isSaveButtonDisabled: false };
-      }
-      return { isSaveButtonDisabled: true };
+      return { isSaveButtonDisabled: !validation };
     });
   };
 
@@ -153,19 +148,20 @@ class App extends React.Component {
           isPreview
         />
         <div>
-          {cardCollection.map((card) => (<Card
-            key={ card.cardName }
-            cardName={ card.cardName }
-            cardDescription={ card.cardDescription }
-            cardImage={ card.cardImage }
-            cardAttr1={ card.cardAttr1.toString() }
-            cardAttr2={ card.cardAttr2.toString() }
-            cardAttr3={ card.cardAttr3.toString() }
-            cardRare={ card.cardRare }
-            cardTrunfo={ card.cardTrunfo }
-            isPreview={ false }
-            onDeleteCardClick={ this.onDeleteCardClick }
-          />))}
+          {cardCollection.map((card) => (
+            <Card
+              key={ card.cardName }
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardImage={ card.cardImage }
+              cardAttr1={ card.cardAttr1.toString() }
+              cardAttr2={ card.cardAttr2.toString() }
+              cardAttr3={ card.cardAttr3.toString() }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+              isPreview={ false }
+              onDeleteCardClick={ this.onDeleteCardClick }
+            />))}
         </div>
       </div>
     );

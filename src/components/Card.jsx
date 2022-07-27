@@ -15,6 +15,7 @@ export default class Card extends Component {
       isPreview,
       onDeleteCardClick,
     } = this.props;
+
     return (
       <div>
         <h1 data-testid="name-card">
@@ -39,7 +40,6 @@ export default class Card extends Component {
             onClick={ () => onDeleteCardClick(cardName) }
           >
             Excluir
-
           </button>)}
       </div>
     );
