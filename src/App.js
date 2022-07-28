@@ -19,6 +19,7 @@ class App extends React.Component {
       cardCollection: [],
       filterCard: '',
       searchRare: '',
+      checkDeckTrunfo: false,
     };
   }
 
@@ -60,6 +61,15 @@ class App extends React.Component {
     this.checkSaveButton();
   }
 
+  checkCardTrunfo = () => {
+    const { cardCollection } = this.state;
+    if (cardCollection.some(({ cardTrunfo }) => cardTrunfo)) {
+      this.setState({ hasTrunfo: true });
+    } else {
+      this.setState({ hasTrunfo: false });
+    }
+  }
+
   onSaveButtonClick = (e) => {
     e.preventDefault();
 
@@ -93,23 +103,24 @@ class App extends React.Component {
         cardAttr2: 0,
         cardAttr3: 0,
         cardRare: 'normal',
-        hasTrunfo: cardTrunfo,
+        cardTrunfo: false,
         isSaveButtonDisabled: true,
       };
-    });
+    }, this.checkCardTrunfo);
   };
 
   onDeleteCardClick = (cardText) => {
     const { cardCollection } = this.state;
-    const card = cardCollection.find(({ cardName }) => cardName === cardText);
-    this.setState({ cardCollection:
-        cardCollection.filter(({ cardName }) => cardName !== cardText),
-    hasTrunfo: !card.cardTrunfo,
-    cardTrunfo: !card.cardTrunfo });
+    this.setState({ cardCollection: cardCollection
+      .filter(({ cardName }) => cardName !== cardText),
+    cardTrunfo: false }, this.checkCardTrunfo);
   }
 
   cardsCollectionFiltered = () => {
-    const { cardCollection, filterCard, searchRare } = this.state;
+    const { cardCollection, filterCard, searchRare, checkDeckTrunfo } = this.state;
+    if (checkDeckTrunfo) {
+      return cardCollection.filter(({ cardTrunfo }) => cardTrunfo);
+    }
     return cardCollection
       .filter(({ cardName, cardRare }) => (
         cardName.includes(filterCard)
@@ -130,6 +141,7 @@ class App extends React.Component {
       hasTrunfo,
       filterCard,
       searchRare,
+      checkDeckTrunfo,
     } = this.state;
     return (
       <div>
@@ -168,6 +180,7 @@ class App extends React.Component {
               data-testid="name-filter"
               value={ filterCard }
               onChange={ this.onInputChange }
+              disabled={ !!checkDeckTrunfo }
             />
           </label>
           <label htmlFor="searchRarity">
@@ -177,12 +190,24 @@ class App extends React.Component {
               name="searchRare"
               onChange={ this.onInputChange }
               value={ searchRare }
+              disabled={ !!checkDeckTrunfo }
             >
               <option value="">todas</option>
               <option value="normal">normal</option>
               <option value="raro">raro</option>
               <option value="muito raro">muito raro</option>
             </select>
+          </label>
+          <label htmlFor="isTrunfo">
+            <input
+              type="checkbox"
+              data-testid="trunfo-filter"
+              id="isTrunfo"
+              name="checkDeckTrunfo"
+              checked={ checkDeckTrunfo }
+              onChange={ this.onInputChange }
+            />
+            Super Trunfo
           </label>
           {this.cardsCollectionFiltered().map((card) => (
             <Card
