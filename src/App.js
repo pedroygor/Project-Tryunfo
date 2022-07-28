@@ -18,6 +18,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       cardCollection: [],
       filterCard: '',
+      searchRare: '',
     };
   }
 
@@ -108,8 +109,11 @@ class App extends React.Component {
   }
 
   cardsCollectionFiltered = () => {
-    const { cardCollection, filterCard } = this.state;
-    return cardCollection.filter(({ cardName }) => cardName.includes(filterCard));
+    const { cardCollection, filterCard, searchRare } = this.state;
+    return cardCollection
+      .filter(({ cardName, cardRare }) => (
+        cardName.includes(filterCard)
+        && (!searchRare ? cardRare.includes(searchRare) : cardRare === searchRare)));
   }
 
   render() {
@@ -125,6 +129,7 @@ class App extends React.Component {
       isSaveButtonDisabled,
       hasTrunfo,
       filterCard,
+      searchRare,
     } = this.state;
     return (
       <div>
@@ -164,6 +169,20 @@ class App extends React.Component {
               value={ filterCard }
               onChange={ this.onInputChange }
             />
+          </label>
+          <label htmlFor="searchRarity">
+            <select
+              id="searchRarity"
+              data-testid="rare-filter"
+              name="searchRare"
+              onChange={ this.onInputChange }
+              value={ searchRare }
+            >
+              <option value="">todas</option>
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muito raro">muito raro</option>
+            </select>
           </label>
           {this.cardsCollectionFiltered().map((card) => (
             <Card
