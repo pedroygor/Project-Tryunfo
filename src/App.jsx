@@ -1,6 +1,9 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import styles from './App.module.css';
+
+import './global.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -144,32 +147,34 @@ class App extends React.Component {
       checkDeckTrunfo,
     } = this.state;
     return (
-      <div>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardImage={ cardImage }
-          cardAttr1={ cardAttr1.toString() }
-          cardAttr2={ cardAttr2.toString() }
-          cardAttr3={ cardAttr3.toString() }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          hasTrunfo={ hasTrunfo }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardImage={ cardImage }
-          cardAttr1={ cardAttr1.toString() }
-          cardAttr2={ cardAttr2.toString() }
-          cardAttr3={ cardAttr3.toString() }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isPreview
-        />
+      <div className={ styles.app }>
+        <div className={ styles.forms }>
+          <Form
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardImage={ cardImage }
+            cardAttr1={ cardAttr1.toString() }
+            cardAttr2={ cardAttr2.toString() }
+            cardAttr3={ cardAttr3.toString() }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            hasTrunfo={ hasTrunfo }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardImage={ cardImage }
+            cardAttr1={ cardAttr1.toString() }
+            cardAttr2={ cardAttr2.toString() }
+            cardAttr3={ cardAttr3.toString() }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            isPreview
+          />
+        </div>
         <div>
           <label htmlFor="filtro">
             Filtro de Busca
@@ -211,7 +216,7 @@ class App extends React.Component {
           </label>
           {this.cardsCollectionFiltered().map((card) => (
             <Card
-              key={ card.cardName }
+              key={ card.cardName + card.cardDescription }
               cardName={ card.cardName }
               cardDescription={ card.cardDescription }
               cardImage={ card.cardImage }
