@@ -1,0 +1,28 @@
+.container {
+  border: 1rem solid var(--green-300);
+  border-radius: 10px;
+  height: 30rem;
+  margin: auto;
+  outline: 10px solid var(--white-100);
+  width: 21.875rem;
+}
+
+.titleCard {
+  color: var(--white-200);
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin-top: 0;
+  padding-right: 0.5rem;
+  text-align: center;
+}
+
+.containerImg {
+  margin: 0.5rem auto;
+  width: 19rem;
+}
+
+.containerImg img {
+  border-radius: 10px;
+  object-fit: cover;
+  width: 100%;
+}
