@@ -3,3 +3,14 @@
   grid-template-columns: 1fr 1fr;
   height: 100vh;
 }
+
+.containerCard {
+  background: var(--green-500);
+  color: var(--white-100);
+}
+
+.containerCard .title {
+  margin-bottom: 3rem;
+  margin-left: 2rem;
+  margin-top: 3rem;
+}

@@ -48,7 +48,7 @@ class App extends React.Component {
       const checkNegativeAttributes = attr1 >= 0 && attr2 >= 0 && attr3 >= 0;
 
       const validation = checkFieldInputs
-      && checkLessThan && checkPoints && checkNegativeAttributes;
+        && checkLessThan && checkPoints && checkNegativeAttributes;
 
       return { isSaveButtonDisabled: !validation };
     });
@@ -114,9 +114,11 @@ class App extends React.Component {
 
   onDeleteCardClick = (cardText) => {
     const { cardCollection } = this.state;
-    this.setState({ cardCollection: cardCollection
-      .filter(({ cardName }) => cardName !== cardText),
-    cardTrunfo: false }, this.checkCardTrunfo);
+    this.setState({
+      cardCollection: cardCollection
+        .filter(({ cardName }) => cardName !== cardText),
+      cardTrunfo: false,
+    }, this.checkCardTrunfo);
   }
 
   cardsCollectionFiltered = () => {
@@ -163,17 +165,20 @@ class App extends React.Component {
             isSaveButtonDisabled={ isSaveButtonDisabled }
             hasTrunfo={ hasTrunfo }
           />
-          <Card
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardImage={ cardImage }
-            cardAttr1={ cardAttr1.toString() }
-            cardAttr2={ cardAttr2.toString() }
-            cardAttr3={ cardAttr3.toString() }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-            isPreview
-          />
+          <div className={ styles.containerCard }>
+            <h1 className={ styles.title }>Pré-visualização</h1>
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardImage={ cardImage }
+              cardAttr1={ cardAttr1.toString() }
+              cardAttr2={ cardAttr2.toString() }
+              cardAttr3={ cardAttr3.toString() }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              isPreview
+            />
+          </div>
         </div>
         <div>
           <label htmlFor="filtro">
