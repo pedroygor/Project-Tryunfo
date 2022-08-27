@@ -1,5 +1,5 @@
 .container {
-  border: 1rem solid var(--green-300);
+  border: 0.5rem solid var(--green-300);
   border-radius: 10px;
   height: 30rem;
   margin: auto;
@@ -16,13 +16,46 @@
   text-align: center;
 }
 
+.description {
+  text-align: center;
+}
+
 .containerImg {
-  margin: 0.5rem auto;
-  width: 19rem;
+  width: 100%;
 }
 
 .containerImg img {
-  border-radius: 10px;
+  height: 19.5rem;
   object-fit: cover;
   width: 100%;
+}
+
+.rareCard {
+  display: none;
+}
+
+.attributes {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.containerAttr {
+  align-items: center;
+  background: var(--green-300);
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.nameAttr {
+  margin-left: 0.2rem;
+}
+
+.valueAttr {
+  background: var(--white-100);
+  color: var(--green-300);
+  padding: 2px;
 }

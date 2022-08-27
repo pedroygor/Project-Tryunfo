@@ -17,7 +17,8 @@ export default class Form extends Component {
       hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
-      onSaveButtonClick } = this.props;
+      onSaveButtonClick,
+    } = this.props;
 
     const inputCheckboxTrunfo = (
       <label htmlFor="#" className={ styles.trunfo }>

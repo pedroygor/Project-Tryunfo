@@ -27,17 +27,32 @@ export default class Card extends Component {
             data-testid="image-card"
           />
         </div>
-        <div>
+        <div className={ styles.infomations }>
           <h1 data-testid="name-card" className={ styles.titleCard }>
             {cardName}
           </h1>
-          <p data-testid="description-card">{cardDescription}</p>
+          <p
+            data-testid="description-card"
+            className={ styles.description }
+          >
+            {cardDescription}
+
+          </p>
           <div className={ styles.attributes }>
-            <p data-testid="attr1-card">{cardAttr1}</p>
-            <p data-testid="attr2-card">{cardAttr2}</p>
-            <p data-testid="attr3-card">{cardAttr3}</p>
+            <div className={ styles.containerAttr }>
+              <p className={ styles.nameAttr }>Inteligência</p>
+              <p data-testid="attr1-card" className={ styles.valueAttr }>{cardAttr1}</p>
+            </div>
+            <div className={ styles.containerAttr }>
+              <p className={ styles.nameAttr }>Força</p>
+              <p data-testid="attr2-card" className={ styles.valueAttr }>{cardAttr2}</p>
+            </div>
+            <div className={ styles.containerAttr }>
+              <p className={ styles.nameAttr }>Destreza</p>
+              <p data-testid="attr3-card" className={ styles.valueAttr }>{cardAttr3}</p>
+            </div>
           </div>
-          <span data-testid="rare-card">{cardRare}</span>
+          <span className={ styles.rareCard } data-testid="rare-card">{cardRare}</span>
           {cardTrunfo && <span data-testid="trunfo-card">Super Trunfo</span>}
         </div>
         {isPreview ? '' : (
